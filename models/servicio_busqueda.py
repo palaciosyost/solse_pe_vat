@@ -137,7 +137,7 @@ def get_ruc_apimigo(token, ruc):
 					'direccion': direccion,
 					'razonSocial': datos_ruc['nombre_o_razon_social'],
 					'ruc': datos_ruc['ruc'],
-					"retencion": datos_retencion['es_agente_de_retencion']
+					"retencion": datos_retencion['success']
 			}
 			datos_buen_contribuyente = es_buen_contribuyente(token, ruc)
 			if datos_buen_contribuyente['buen_contribuyente']:
