@@ -125,7 +125,7 @@ def get_ruc_apimigo(token, ruc):
 		data_retencion = requests.post(url=retencion, data=datos_consultar)
 		_logger.info("------------------------DATOS--------------------------------")
 		_logger.info(datos_request.json())
-		_logger.info(data_retencion.json())
+		_logger.info(data_retencion.json() if data_retencion.status_code == 200 else "No es agente de retencion")
 		if datos_request.status_code == 200 :
 			datos_ruc = datos_request.json()
 			datos_retencion = data_retencion.json() if data_retencion.status_code == 200 else ""
