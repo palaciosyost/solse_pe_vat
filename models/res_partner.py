@@ -402,6 +402,7 @@ class Partner(models.Model):
                         record.company_type = "company"
                         record.state_sunat = vals.get("estado", False)
                         record.condition = vals.get("condicion", False)
+						record.is_retenedor = bool(vals.get("retencion"))
                         record.is_validate = True
                         _logger.info("🎉 Datos de RUC aplicados: %s", vals.get("razonSocial"))
 

@@ -114,6 +114,7 @@ def get_dni_apimigo(token, dni):
 
 def get_ruc_apimigo(token, ruc):
 	endpoint = "https://api.migo.pe/api/v1/ruc/"
+	retencion = "https://api.migo.pe/api/v1/ruc/agentes-retencion"
 	datos_consultar = {
 		'ruc': ruc,
 		'token': token
@@ -121,8 +122,10 @@ def get_ruc_apimigo(token, ruc):
 	datos = ""
 	try:
 		datos_request = requests.post(url=endpoint, data=datos_consultar)
-		if datos_request.status_code == 200:
+		data_retencion = requests.post(url=retencion, data=datos_consultar)
+		if datos_request.status_code == 200 and data_retencion.status_code == 200:
 			datos_ruc = datos_request.json()
+			datos_retencion = data_retencion.json()
 			ubigeo = datos_ruc['ubigeo']
 			direccion = datos_ruc['direccion_simple'] or ''
 			datos = {
@@ -134,6 +137,7 @@ def get_ruc_apimigo(token, ruc):
 					'direccion': direccion,
 					'razonSocial': datos_ruc['nombre_o_razon_social'],
 					'ruc': datos_ruc['ruc'],
+					"retencion": datos_retencion['es_agente_de_retencion']
 			}
 			datos_buen_contribuyente = es_buen_contribuyente(token, ruc)
 			if datos_buen_contribuyente['buen_contribuyente']:

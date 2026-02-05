@@ -19,7 +19,7 @@
 	'category': 'Uncategorized',
 	'version': '0.2',
 	#'license': 'Other proprietary',
-	'depends': ['base', 'l10n_pe'],
+	'depends': ['base', 'l10n_pe', "l10n_pe_retencion"],
 
 	'data': [
 		'security/ir.model.access.csv',
