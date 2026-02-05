@@ -126,9 +126,9 @@ def get_ruc_apimigo(token, ruc):
 		_logger.info("------------------------DATOS--------------------------------")
 		_logger.info(datos_request.json())
 		_logger.info(data_retencion.json())
-		if datos_request.status_code == 200 and data_retencion.status_code == 200:
+		if datos_request.status_code == 200 :
 			datos_ruc = datos_request.json()
-			datos_retencion = data_retencion.json()
+			datos_retencion = data_retencion.json() if data_retencion.status_code == 200 else ""
 			ubigeo = datos_ruc['ubigeo']
 			direccion = datos_ruc['direccion_simple'] or ''
 			datos = {
@@ -140,7 +140,7 @@ def get_ruc_apimigo(token, ruc):
 					'direccion': direccion,
 					'razonSocial': datos_ruc['nombre_o_razon_social'],
 					'ruc': datos_ruc['ruc'],
-					"retencion": datos_retencion['success']
+					"retencion": datos_retencion['success']  if datos_retencion else False,
 			}
 			datos_buen_contribuyente = es_buen_contribuyente(token, ruc)
 			if datos_buen_contribuyente['buen_contribuyente']:
