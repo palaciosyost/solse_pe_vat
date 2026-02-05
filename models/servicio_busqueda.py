@@ -124,8 +124,8 @@ def get_ruc_apimigo(token, ruc):
 		datos_request = requests.post(url=endpoint, data=datos_consultar)
 		data_retencion = requests.post(url=retencion, data=datos_consultar)
 		_logger.info("------------------------DATOS--------------------------------")
-		_logger.info(datos_request)
-		_logger.info(data_retencion)
+		_logger.info(datos_request.json())
+		_logger.info(data_retencion.json())
 		if datos_request.status_code == 200 and data_retencion.status_code == 200:
 			datos_ruc = datos_request.json()
 			datos_retencion = data_retencion.json()
