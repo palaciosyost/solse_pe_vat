@@ -13,3 +13,11 @@ class City(models.Model):
 	def _compute_nombre_simple(self):
 		for reg in self:
 			reg.name_simple = unicodedata.normalize('NFKD', reg.name).encode('ASCII', 'ignore').strip().upper().decode()
+
+
+
+class Stock (models.Model):
+    _inherit = "stock.picking"
+
+
+    weight = fields.Float(string="Peso", readonly=False)
