@@ -252,7 +252,7 @@ class Partner(models.Model):
                     raise ValidationError(
                         "Ingrese el número de documento %s" % doc_type)
                 vat = partner.vat
-                if doc_type == '6':
+                if doc_type == '6' :
                     check = self.validate_ruc(vat)
                     if not check:
                         raise ValidationError('El RUC ingresado es incorrecto')
@@ -263,7 +263,7 @@ class Partner(models.Model):
     @api.onchange('l10n_latam_identification_type_id')
     def onchange_company_type(self):
         doc_type = self.l10n_latam_identification_type_id.l10n_pe_vat_code
-        if doc_type == "6":
+        if doc_type == "6" and not self.parent_id:
             self.company_type = 'company'
         else:
             self.company_type = 'person'
