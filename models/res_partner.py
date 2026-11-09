@@ -150,8 +150,11 @@ class Partner(models.Model):
     def update_parent(self):
         tipo_documento = self.parent_id.l10n_latam_identification_type_id
         nro_documento = self.parent_id.vat
+        
         self.l10n_latam_identification_type_id = tipo_documento
         self.vat = nro_documento
+        self.company_type = "person"
+
 
     def consulta_datos_simple(self, tipo_documento, nro_documento):
         # res = {'error': True, 'message': None, 'data': {}}
@@ -318,8 +321,8 @@ class Partner(models.Model):
                         "✅ ZIP actualizado manualmente: %s", record.zip)
                 return
 
-            if not vat:
-                _logger.warning("⚠️ No hay VAT, se termina aquí")
+            if not vat or self.parent_id:
+                _logger.warning("⚠️ No hay VAT o es una sucursal, se termina aquí")
                 return
 
             # Obtener token y método de búsqueda
