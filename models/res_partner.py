@@ -146,6 +146,13 @@ class Partner(models.Model):
     busqueda_automatica = fields.Boolean("Busqueda automatica", default=True,
                                          help="Si esta marcado cuando ingrese o cambie el numero ruc o dni se buscaran sus datos en la pagina de SUNAT")
 
+    @api.onchange("parent_id")
+    def update_parent(self):
+        tipo_documento = self.parent_id.l10n_latam_identification_type_id
+        nro_documento = self.parent_id.vat
+        self.l10n_latam_identification_type_id = tipo_documento
+        self.vat = nro_documento
+
     def consulta_datos_simple(self, tipo_documento, nro_documento):
         # res = {'error': True, 'message': None, 'data': {}}
 

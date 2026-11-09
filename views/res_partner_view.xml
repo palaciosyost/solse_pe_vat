@@ -16,16 +16,6 @@
 				<widget name="web_ribbon" title="Precaución" bg_color="bg-danger" invisible="condition == 'HABIDO' and state_sunat =='ACTIVO'" />
 			</xpath>
 			
-			<xpath expr="//field[@name='category_id']" position="after">
-				<field name="state_sunat" invisible="is_company == False" />
-				<field name="condition" invisible="is_company == False" />
-				<field name="buen_contribuyente" invisible="is_company == False" />
-				<field name="a_partir_del" invisible="is_company == False or buen_contribuyente == False" />
-				<field name="resolucion" invisible="is_company == False or buen_contribuyente == False" />
-				<field name="busqueda_automatica" />
-				<field name="is_validate" invisible="True" />
-			</xpath>
-
 			<xpath expr="//page[@name='sales_purchases']" position="after">
 				<page name="sunat_details" string="SUNAT" invisible="is_company == False">
 					<group name="container_sunat_general" invisible="is_company == False">
@@ -33,6 +23,15 @@
 							<field name="legal_name" placeholder="Nombre Legal" invisible="is_company == False" required="is_company == True" readonly="is_validate == True" force_save="1"/>
 							<field name="commercial_name" placeholder="Nombre comercial" invisible="is_company == False" required="is_company == True"  force_save="1"/>
 							<field name="last_update" invisible="is_company == False" />
+						</group>
+						<group name="name" string="Informacion SUNAT">
+							<field name="state_sunat" invisible="is_company == False" />
+							<field name="condition" invisible="is_company == False" />
+							<field name="buen_contribuyente" invisible="is_company == False" />
+							<field name="a_partir_del" invisible="is_company == False or buen_contribuyente == False" />
+							<field name="resolucion" invisible="is_company == False or buen_contribuyente == False" />
+							<field name="busqueda_automatica" />
+							<field name="is_validate" invisible="True" />
 						</group>
 						<!--separator string="Aconomic Pctivities" colspan="2" /-->
 					</group>
